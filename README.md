@@ -5,7 +5,6 @@
 - For the official installation instructions please go to: https://docs.ros.org/en/foxy/Installation/Windows-Install-Binary.html
 - The instructions here are simplified version.
 
-
 ### Installing prerequisites
 __Before you start, make sure your windows C drive has enough disk space (20 - 50 GB at least)! A lot of software and dependencies will be installed__
 
@@ -88,6 +87,9 @@ choco install -y -s <PATH\TO\DOWNLOADS> asio cunit eigen tinyxml-usestl tinyxml2
 ```
 python -m pip install -U catkin_pkg cryptography empy ifcfg lark-parser lxml netifaces numpy opencv-python pyparsing pyyaml setuptools rosdistro
 ```
+Don't worry if you encountered any problems here. 
+
+
 - RQt dependencies
 ```
 python -m pip install -U pydot PyQt5
@@ -96,3 +98,41 @@ python -m pip install -U pydot PyQt5
 ```
 choco install graphviz
 ```
+
+- Install developer tools
+```
+pip install -U vcstool
+```
+test it by run ```vcs```
+- Install colcon, curl
+```
+pip install -U colcon-common-extensions
+choco install -y curl
+```
+
+possible error here: 
+```
+ERROR: resampy 0.2.2 requires scipy>=0.13, which is not installed.
+ERROR: pooch 1.5.2 requires requests, which is not installed.
+ERROR: librosa 0.8.1 requires decorator>=3.0.0, which is not installed.
+ERROR: librosa 0.8.1 requires joblib>=0.14, which is not installed.
+ERROR: librosa 0.8.1 requires scikit-learn!=0.19.0,>=0.14.0, which is not installed.
+ERROR: librosa 0.8.1 requires scipy>=1.0.0, which is not installed.
+```
+Don't worry about it, just proceed to next
+- Install dependencies
+```
+python -m pip install -U setuptools pip
+
+pip install -U catkin_pkg cryptography EmPy ifcfg lark-parser lxml numpy pyparsing pyyaml
+
+pip install -U pytest pytest-mock coverage mock
+
+choco install -y cppcheck
+```
+- install xmllint
+    - Download the 64 bit binary archives of [libxml2](https://www.zlatkovic.com/pub/libxml/64bit/)
+    and also iconv and zlib
+    - Unpack all archives into e.g. C:\xmllint
+    - Add C:\xmllint\bin to the PATH.
+    - you may need 7 zip to unpack the package: https://7-zip.en.softonic.com/download?utm_source=SEM&utm_medium=paid&utm_campaign=EN_UK_DSA&gclid=Cj0KCQiA3-yQBhD3ARIsAHuHT66ciu7Y6SZ8tRLwFWgsfQdOmsQzqEeZlqicIbdF4JQYgbs_dhcMLoYaAg0dEALw_wcB
