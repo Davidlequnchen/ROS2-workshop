@@ -2,6 +2,9 @@
  This is the repository prepared for NTU MAE robotics club ROS workshop
 
 ## ROS2 Foxy Installation Instructions
+- For the official installation instructions please go to: https://docs.ros.org/en/foxy/Installation/Windows-Install-Binary.html
+- The instructions here are simplified version.
+
 
 ### Installing prerequisites
 __Before you start, make sure your windows C drive has enough disk space (20 - 50 GB at least)! A lot of software and dependencies will be installed__
@@ -46,16 +49,15 @@ clicking the Windows icon, typing “Environment Variables”, then clicking on 
 - Make sure that the Visual C++ features are installed.
 - Make sure that no C++ CMake tools are installed by unselecting them in the list of components to be installed.
 - select the __Desktop development with C++__ workflow during the install.
-- 
 
-##### Install OpenCV
+### Install OpenCV
 - download a precompiled version of OpenCV 3.4.6 from
 https://github.com/ros2/ros2/releases/download/opencv-archives/opencv-3.4.6-vc16.VS2019.zip
 - Assuming you unpacked it to C:\opencv, type the following on a Command Prompt (requires Admin privileges):
 ```setx -m OpenCV_DIR C:\opencv```
 - Add the __PATH variable__ in the environment (same procedure as before): ```C:\opencv\x64\vc16\bin```.
 
-#### Install dependencies
+### Install dependencies
 - cmake:
 ```
 choco install -y cmake
