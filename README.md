@@ -199,6 +199,7 @@ It is normal that the previous command, if nothing else went wrong, outputs “T
 
 ### Test and run
 Note that the first time you run any executable you will have to allow access to the network through a Windows Firewall popup
+(this is optional)
 ```
 colcon test --merge-install
 ```
