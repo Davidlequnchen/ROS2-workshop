@@ -1,7 +1,11 @@
 # ROS2 workshop
  This is the repository prepared for NTU MAE robotics club ROS workshop
 
-## ROS2 Foxy Installation Instructions
+## ROS2 Installation
+
+It is highly recommended to install ROS/ROS2 on Ubuntu 20.04 Instead of Windows. 
+
+## ROS2 Foxy Installation Instructions (For Windows)
 - For the official installation instructions please go to: https://docs.ros.org/en/foxy/Installation/Windows-Install-Binary.html
 - The instructions here are simplified version.
 
@@ -184,4 +188,37 @@ vcs import --input ros2.repos src
 - To build the `\dev\ros2_foxy` folder tree:
 ```
 colcon build --merge-install
+```
+
+### Environment setup
+Start a command shell and source the ROS 2 setup file to set up the workspace:
+```
+call C:\dev\ros2_foxy\install\local_setup.bat
+```
+It is normal that the previous command, if nothing else went wrong, outputs “The system cannot find the path specified.” exactly once.
+
+### Test and run
+Note that the first time you run any executable you will have to allow access to the network through a Windows Firewall popup
+```
+colcon test --merge-install
+```
+Note: `--merge-install should only be used if it was also used in the build step.`
+
+Then you can get a summary by:
+```
+colcon test-result
+```
+
+### Running some examples for testing
+To run the examples, first open a clean new cmd.exe and set up the workspace by sourcing the local_setup.bat file. Then, run a C++ __talker__:
+(navigate to your workspace first)
+```
+call install\local_setup.bat
+ros2 run demo_nodes_cpp talker
+```
+
+In a separate shell you can do the same, but instead run a Python __listener__:
+```
+call install\local_setup.bat
+ros2 run demo_nodes_py listener
 ```
