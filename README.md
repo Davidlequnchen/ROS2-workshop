@@ -44,6 +44,7 @@ clicking the Windows icon, typing “Environment Variables”, then clicking on 
 
 
 ### Install Visual Studio (Around 8 GB)
+- Since it takes a lot of space, maybe you can skip this step. If it causes any problems, then can go back and install it (I haven't test it yet, you can tell me if it works without visual studio)
 - Download [visual studio 2019 community version](https://visualstudio.microsoft.com/zh-hans/thank-you-downloading-visual-studio/?sku=Community&rel=16&src=myvs&utm_medium=microsoft&utm_source=my.visualstudio.com&utm_campaign=download&utm_content=vs+community+2019#install)
 - Make sure that the Visual C++ features are installed.
 - Make sure that no C++ CMake tools are installed by unselecting them in the list of components to be installed.
@@ -129,6 +130,8 @@ pip install -U catkin_pkg cryptography EmPy ifcfg lark-parser lxml numpy pyparsi
 pip install -U pytest pytest-mock coverage mock
 
 choco install -y cppcheck
+
+pip install -U flake8 flake8-blind-except flake8-builtins flake8-class-newline flake8-comprehensions flake8-deprecated flake8-docstrings flake8-import-order flake8-quotes mypy==0.761 pep8 pydocstyle
 ```
 - install xmllint
     - Download the 64 bit binary archives of [libxml2](https://www.zlatkovic.com/pub/libxml/64bit/)
@@ -136,3 +139,49 @@ choco install -y cppcheck
     - Unpack all archives into e.g. C:\xmllint
     - Add C:\xmllint\bin to the PATH.
     - you may need 7 zip to unpack the package: https://7-zip.en.softonic.com/download?utm_source=SEM&utm_medium=paid&utm_campaign=EN_UK_DSA&gclid=Cj0KCQiA3-yQBhD3ARIsAHuHT66ciu7Y6SZ8tRLwFWgsfQdOmsQzqEeZlqicIbdF4JQYgbs_dhcMLoYaAg0dEALw_wcB
+
+- Install Qt5 (Optional, necessary for __Rviz__, around 6GB)
+    - Download (Qt Online Installer for Windows. (select try Qt section)): https://www.qt.io/download
+    - Run the installer and install Qt5.
+    - set the Qt5_DIR environment variable in the cmd.exe where you intend to build so that CMake can find it:
+```
+set Qt5_DIR=C:\Qt\5.15.0\msvc2019_64
+```
+
+only required if you are building rviz, but it comes with our default set of sources, so if you don’t know, then assume you are building it.
+
+
+We recommend you install it to the default location of C:\Qt, but if you choose somewhere else, make sure to update the paths below accordingly. When selecting components to install, the only thing you absolutely need for Foxy and later is the appropriate MSVC 64-bit component under the Qt -> Qt 5.15.0 tree. We’re using 5.15.0 as of the writing of this document and that’s what we recommend since that’s all we test on Windows, but later version will probably work too. 
+
+
+## Get the ROS2 Source code
+- First setup a development folder, for example `C:\dev\ros2_foxy`:
+```
+md \dev\ros2_foxy\src
+cd \dev\ros2_foxy
+```
+- Get the __ros2.repos__ file which defines the repositories to clone from:
+```
+# CMD
+curl -sk https://raw.githubusercontent.com/ros2/ros2/foxy/ros2.repos -o ros2.repos
+
+# PowerShell
+curl https://raw.githubusercontent.com/ros2/ros2/foxy/ros2.repos -o ros2.repos
+```
+Powershell means you are using powershell. Default is using command line (terminal)
+
+- use __vcs__ to import the repositories listed in the ros2.repos file:
+```
+# CMD
+vcs import src < ros2.repos
+
+# PowerShell
+vcs import --input ros2.repos src
+```
+
+### Build the ROS2 source code on windows
+- Open Visual Studio Command Prompt: search __x64 Native Tools Command Prompt for VS 2019__, as Administrator 
+- To build the `\dev\ros2_foxy` folder tree:
+```
+colcon build --merge-install
+```
